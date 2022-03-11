@@ -1,0 +1,24 @@
+###setup
+POST http://localhost:8080/setup
+
+###findByLasName
+GET http://localhost:8080/personByLastName
+
+
+###all
+GET http://localhost:8080/all
+
+
+###aggregate
+GET http://localhost:8080/aggregate
+
+
+###update
+GET http://localhost:8080/update
+
+
+###filter
+GET http://localhost:8080/filterByName
+
+
+###
