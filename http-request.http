@@ -4,6 +4,9 @@ POST http://localhost:8080/setup
 ###findByLasName
 GET http://localhost:8080/personByLastName
 
+###
+GET localhost:8080/ivans
+
 
 ###all
 GET http://localhost:8080/all

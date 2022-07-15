@@ -21,6 +21,9 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     @MongoFindQuery(filter = "{surname:{$regex: :surname}}", sort = "{name: 1}")
     List<Person> customFindByLastName(String surname);
 
+    @MongoFindQuery(filter = "{firstName:ivan}", sort = "{id:1}")
+    List<Person> customFindByConstantName();
+
     @MongoAggregateQuery("[{$match: {surname:{$regex: :surname}}}, {$sort: {surname: 1}}, {$project: {surname: 1,name: 1,year: 1, title: 1}}]")
     List<Person> customAggregateAndProject(String surname);
 
@@ -31,6 +34,6 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     void customDeleteByTitle(String title);
 
     // for some reasons filter is ignored here, but projection works
-    @MongoFilter("{name: {$regex: :name}}") @MongoProjection("{surname: 1,name: 1,year: 1, title: 1}")
+    @MongoFilter("{name: {$regex: :name}}") @MongoProjection("{surname: 1, name: 1, year: 1, title: 1}")
     List<Person> findByBirthYearLessThan(Integer birthYear, String name);
 }

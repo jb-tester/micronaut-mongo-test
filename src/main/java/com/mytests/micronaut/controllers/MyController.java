@@ -38,6 +38,12 @@ public class MyController {
     public List<Person> personByLastName() {
         return personService.findByLastNameRegex();
     }
+
+    @Get("/ivans")
+    public List<Person> personByConstantName() {
+        return personService.testSearchByName();
+    }
+
     @Get("/aggregate")
     public List<Person> personByLastNameAggregated() {
         return personService.aggregationTest();

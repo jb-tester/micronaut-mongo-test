@@ -5,6 +5,8 @@ import io.micronaut.data.mongodb.annotation.MongoRepository;
 import io.micronaut.data.repository.CrudRepository;
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 /**
  * *
  * <p>Created by irina on 3/10/2022.</p>
@@ -13,4 +15,6 @@ import org.bson.types.ObjectId;
  */
 @MongoRepository
 public interface CardRepository extends CrudRepository<Card, ObjectId> {
+
+    List<Card> findByNumberEqualsAndValidTrue(String number);
 }
