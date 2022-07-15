@@ -30,6 +30,10 @@ public class SetupDB {
 
     @Inject
     MongoClient client;
+
+    public void addSinglePerson(String name, String surname, int year){
+        createPerson(name, surname, year, 1, "just_added");
+    }
     public void setUp(){
         client.getDatabase("micronaut1").drop();
         createPerson("ivan", "ivanov", 1950, 2, "no");

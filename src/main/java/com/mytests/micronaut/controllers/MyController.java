@@ -3,10 +3,7 @@ package com.mytests.micronaut.controllers;
 import com.mytests.micronaut.model.Person;
 import com.mytests.micronaut.services.PersonService;
 import com.mytests.micronaut.services.SetupDB;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -28,7 +25,10 @@ public class MyController {
     public void setup() {
         setupDBService.setUp();
     }
-
+    @Post("/add/{fname}/{sname}/{year}")
+    public void addPerson(@PathVariable String fname, @PathVariable String sname, @PathVariable String year) {
+        setupDBService.addSinglePerson(fname,sname,Integer.parseInt(year));
+    }
     @Get("/all")
     public List<Person> listAll() {
         return personService.listAll();
@@ -40,8 +40,13 @@ public class MyController {
     }
 
     @Get("/ivans")
-    public List<Person> personByConstantName() {
+    public List<Person> personByName() {
         return personService.testSearchByName();
+    }
+
+    @Get("/byYear")
+    public List<Person> personByConstantYear() {
+        return personService.testSearchByYear();
     }
 
     @Get("/aggregate")

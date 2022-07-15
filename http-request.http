@@ -1,11 +1,15 @@
+
 ###setup
 POST http://localhost:8080/setup
 
-###findByLasName
+###findByLastName
 GET http://localhost:8080/personByLastName
 
-###
+###findByFirstName
 GET localhost:8080/ivans
+
+###findByYear
+GET http://localhost:8080/byYear
 
 
 ###all

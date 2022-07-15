@@ -21,16 +21,19 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     @MongoFindQuery(filter = "{surname:{$regex: :surname}}", sort = "{name: 1}")
     List<Person> customFindByLastName(String surname);
 
-    @MongoFindQuery(filter = "{firstName: {$eq: :fname}}", sort = "{id:1}")
-    List<Person> customFindByConstantName(String fname);
+    @MongoFindQuery(filter = "{name: :fname}", sort = "{surname: 1}", collation = "{locale:'en_US', numericOrdering: true}")
+    List<Person> customFindByFirstName(String fname);
 
-    @MongoAggregateQuery("[{$match: {surname:{$regex: :surname}}}, {$sort: {surname: 1}}, {$project: {surname: 1,name: 1,year: 1, title: 1}}]")
+    @MongoFindQuery(filter = "{year:1950}", sort = "{surname:1}", collation = "{locale:'en_US', numericOrdering: true}")
+    List<Person> customFindByConstantYear();
+
+    @MongoAggregateQuery("[{$match: {surname:{$regex: :surname}}}, {$sort: {year: 1}}, {$project: {surname: 1,name: 1,year: 1, title: 1}}]")
     List<Person> customAggregateAndProject(String surname);
 
-    @MongoUpdateQuery(filter = "{year:{$lt: :year}}", update = "{$set:{title: 'senior'}}")
+    @MongoUpdateQuery(filter = "{year:{$lt: :year}}", update = "{$set:{title: 'senior'}}", collation = "{locale:'en_US', numericOrdering: true}")
     List<Person> customUpdateTitleByBirthYear(int year);
 
-    @MongoDeleteQuery(filter = "{title:{$regex: :title}}", collation = "{locale:'en_US', numericOrdering:true}")
+    @MongoDeleteQuery(filter = "{title:{$regex: :title}}", collation = "{locale:'en_US', numericOrdering: true}")
     void customDeleteByTitle(String title);
 
     // for some reasons filter is ignored here, but projection works

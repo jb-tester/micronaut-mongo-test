@@ -39,5 +39,6 @@ public class PersonService {
         return repository.findByBirthYearLessThan(1971, "ivan");
     }
 
-    public List<Person> testSearchByName(){ return repository.customFindByConstantName("ivan");}
+    public List<Person> testSearchByName(){ return repository.customFindByFirstName("ivan");}
+    public List<Person> testSearchByYear(){ return repository.customFindByConstantYear();}
 }
