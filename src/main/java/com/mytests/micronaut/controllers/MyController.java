@@ -63,4 +63,13 @@ public class MyController {
     public List<Person> filteredByName() {
         return personService.testFilter();
     }
+
+    @Get("/byName1")
+    public List<Person> findByName1() {
+        return personService.testFindByNameStandard();
+    }
+    @Get("/byName2")
+    public List<Person> findByName2() {
+        return personService.testFindByNameCustom();
+    }
 }

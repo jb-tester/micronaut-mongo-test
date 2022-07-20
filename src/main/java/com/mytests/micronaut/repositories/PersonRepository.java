@@ -17,6 +17,11 @@ public interface PersonRepository extends CrudRepository<Person, String> {
 
     void update(@Id String id, Set<Card> cards);
 
+    List<Person> findByFirstName(String firstName);
+
+    @MongoFindQuery("{name: :firstName}")
+    //@MongoFindQuery("{firstName: :firstName}") - INCORRECT
+    List<Person> findByFirstName_custom(String firstName);
 
     @MongoFindQuery(filter = "{surname:{$regex: :surname}}", sort = "{name: 1}")
     List<Person> customFindByLastName(String surname);

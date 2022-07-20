@@ -41,4 +41,12 @@ public class PersonService {
 
     public List<Person> testSearchByName(){ return repository.customFindByFirstName("ivan");}
     public List<Person> testSearchByYear(){ return repository.customFindByConstantYear();}
+
+    public List<Person> testFindByNameStandard() {
+        return repository.findByFirstName("ivan");
+    }
+
+    public List<Person> testFindByNameCustom() {
+        return repository.findByFirstName_custom("ivan");
+    }
 }

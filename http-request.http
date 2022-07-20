@@ -1,3 +1,12 @@
+###byNameStandard
+GET http://localhost:8080/byName1
+
+<> 2022-07-20T114005.200.json
+
+###byNameCustom
+GET http://localhost:8080/byName2
+
+<> 2022-07-20T114018.200.json
 
 ###setup
 POST http://localhost:8080/setup
