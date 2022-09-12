@@ -23,6 +23,7 @@
     <micronaut.runtime>netty</micronaut.runtime>
   </properties>
 
+
   <repositories>
     <repository>
       <id>central</id>
@@ -172,8 +173,8 @@
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
-            <arg>-Amicronaut.processing.group=com.example</arg>
-            <arg>-Amicronaut.processing.module=demo</arg>
+            <arg>-Amicronaut.processing.group=com.mytests.micronaut</arg>
+            <arg>-Amicronaut.processing.module=micronaut-mongo-test</arg>
           </compilerArgs>
         </configuration>
       </plugin>

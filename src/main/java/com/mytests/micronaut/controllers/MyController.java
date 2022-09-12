@@ -1,6 +1,8 @@
 package com.mytests.micronaut.controllers;
 
+import com.mytests.micronaut.model.Issue;
 import com.mytests.micronaut.model.Person;
+import com.mytests.micronaut.services.IssueService;
 import com.mytests.micronaut.services.PersonService;
 import com.mytests.micronaut.services.SetupDB;
 import io.micronaut.http.annotation.*;
@@ -21,6 +23,9 @@ public class MyController {
     SetupDB setupDBService;
     @Inject
     PersonService personService;
+    @Inject
+    IssueService issueService;
+
     @Post("/setup")
     public void setup() {
         setupDBService.setUp();
@@ -72,4 +77,15 @@ public class MyController {
     public List<Person> findByName2() {
         return personService.testFindByNameCustom();
     }
+
+    @Get("/byCards1")
+    public List<Person> findByCardNumberPattern(){
+        return personService.testFindByCards();
+    }
+
+    @Get("/issuesAfter")
+    public List<Issue> getIssuesCreatedAfter(){
+        return issueService.findByCreatedAfter();
+    }
+
 }

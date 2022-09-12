@@ -16,5 +16,8 @@ import java.util.List;
 @MongoRepository
 public interface CardRepository extends CrudRepository<Card, ObjectId> {
 
+
     List<Card> findByNumberEquals(String number);
+
+
 }

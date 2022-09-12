@@ -3,6 +3,7 @@ package com.mytests.micronaut.repositories;
 import com.mytests.micronaut.model.Card;
 import com.mytests.micronaut.model.Person;
 import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.Join;
 import io.micronaut.data.mongodb.annotation.*;
 import io.micronaut.data.repository.CrudRepository;
 
@@ -20,7 +21,7 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     List<Person> findByFirstName(String firstName);
 
     @MongoFindQuery("{name: :firstName}")
-    //@MongoFindQuery("{firstName: :firstName}") - INCORRECT
+    //@MongoFindQuery("{firstName: :firstName}") //- INCORRECT
     List<Person> findByFirstName_custom(String firstName);
 
     @MongoFindQuery(filter = "{surname:{$regex: :surname}}", sort = "{name: 1}")
@@ -29,7 +30,7 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     @MongoFindQuery(filter = "{name: :fname}", sort = "{surname: 1}", collation = "{locale:'en_US', numericOrdering: true}")
     List<Person> customFindByFirstName(String fname);
 
-    @MongoFindQuery(filter = "{year:1950}", sort = "{surname:1}", collation = "{locale:'en_US', numericOrdering: true}")
+    @MongoFindQuery(filter = "{year: 1950}", sort = "{surname: 1}", collation = "{locale:'en_US', numericOrdering: true}")
     List<Person> customFindByConstantYear();
 
     @MongoAggregateQuery("[{$match: {surname:{$regex: :surname}}}, {$sort: {year: 1}}, {$project: {surname: 1,name: 1,year: 1, title: 1}}]")
@@ -44,4 +45,8 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     // for some reasons filter is ignored here, but projection works
     @MongoFilter("{name: {$regex: :name}}") @MongoProjection("{surname: 1, name: 1, year: 1, title: 1}")
     List<Person> findByBirthYearLessThan(Integer birthYear, String name);
+
+
+    @MongoFindQuery("{'cards.number': {$regex: :pattern }}") @Join("card")
+    List<Person> findByCards(String pattern);
 }

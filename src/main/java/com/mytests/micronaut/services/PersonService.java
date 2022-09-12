@@ -49,4 +49,8 @@ public class PersonService {
     public List<Person> testFindByNameCustom() {
         return repository.findByFirstName_custom("ivan");
     }
+
+    public List<Person> testFindByCards(){
+        return repository.findByCards("9.*");
+    }
 }

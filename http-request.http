@@ -1,3 +1,9 @@
+###issuesAfter
+GET http://localhost:8080/issuesAfter
+
+###issuesBefore
+GET http://localhost:8080/issuesBefore
+
 ###byNameStandard
 GET http://localhost:8080/byName1
 
@@ -21,7 +27,7 @@ GET localhost:8080/ivans
 GET http://localhost:8080/byYear
 
 
-###all
+###allPerson
 GET http://localhost:8080/all
 
 
@@ -36,5 +42,7 @@ GET http://localhost:8080/update
 ###filter
 GET http://localhost:8080/filterByName
 
+###personsByCards
+GET http://localhost:8080/byCards1
 
 ###
