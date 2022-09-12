@@ -17,11 +17,14 @@ import java.util.List;
  */
 @MongoRepository
 public interface IssueRepository extends CrudRepository<Issue, ObjectId> {
+    // no fields except id can be completed here: https://youtrack.jetbrains.com/issue/IDEA-301688
 
+    // parsing errors in case of ISODate using: https://youtrack.jetbrains.com/issue/IDEA-301689
     @MongoFindQuery("{created: {$gt: ISODate('2020-04-30T00:00:00.000Z')}}")
     List<Issue> findByCreatedAfter();
 
-    // for completion testing:
-    /*@MongoFindQuery("{}")
-    List<Issue> findByTitlePattern();*/
+    // false inspection violations in case of incorrect method signature but present annotation:
+    // https://youtrack.jetbrains.com/issue/IDEA-301664
+    @MongoFindQuery("{title: {$regex: :pattern} }")
+    List<Issue> findByTitlePattern(String pattern);
 }

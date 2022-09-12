@@ -30,7 +30,8 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     @MongoFindQuery(filter = "{name: :fname}", sort = "{surname: 1}", collation = "{locale:'en_US', numericOrdering: true}")
     List<Person> customFindByFirstName(String fname);
 
-    @MongoFindQuery(filter = "{year: 1950}", sort = "{surname: 1}", collation = "{locale:'en_US', numericOrdering: true}")
+    // parser error in case of missing space before the not-quoted value - https://youtrack.jetbrains.com/issue/IDEA-298049
+    @MongoFindQuery(filter = "{year:1950}", sort = "{surname:1}", collation = "{locale:'en_US', numericOrdering: true}")
     List<Person> customFindByConstantYear();
 
     @MongoAggregateQuery("[{$match: {surname:{$regex: :surname}}}, {$sort: {year: 1}}, {$project: {surname: 1,name: 1,year: 1, title: 1}}]")
@@ -47,6 +48,8 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     List<Person> findByBirthYearLessThan(Integer birthYear, String name);
 
 
+    // false inspection violations in case of incorrect method signature but present annotation:
+    // https://youtrack.jetbrains.com/issue/IDEA-301664
     @MongoFindQuery("{'cards.number': {$regex: :pattern }}") @Join("card")
     List<Person> findByCards(String pattern);
 }

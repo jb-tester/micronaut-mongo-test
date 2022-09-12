@@ -19,7 +19,7 @@ import java.util.Date;
 public class Issue {
     @Id
     @GeneratedValue
-    ObjectId id;
+    ObjectId id;   // no navigation by gutter icon - https://youtrack.jetbrains.com/issue/IDEA-301690
 
     String title;
     String description;
