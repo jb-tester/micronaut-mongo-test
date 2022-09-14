@@ -1,9 +1,6 @@
 ###issuesAfter
 GET http://localhost:8080/issuesAfter
 
-###issuesBefore
-GET http://localhost:8080/issuesBefore
-
 ###byNameStandard
 GET http://localhost:8080/byName1
 
