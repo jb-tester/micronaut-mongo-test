@@ -5,6 +5,7 @@ import com.mytests.micronaut.model.Person;
 import com.mytests.micronaut.services.IssueService;
 import com.mytests.micronaut.services.PersonService;
 import com.mytests.micronaut.services.SetupDB;
+import io.micronaut.context.ApplicationContext;
 import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 

@@ -28,11 +28,11 @@ public class PersonService {
     }
 
     public List<Person> aggregationTest(){
-        return repository.customAggregateAndProject("petrov");
+        return repository.findBySurnameAndAggregateAndProject("petrov");
     }
 
     public List<Person> updateTest(){
-        return repository.customUpdateTitleByBirthYear(1960);
+        return repository.updateTitleByBirthYears(1960);
     }
 
     public List<Person> testFilter(){
@@ -40,7 +40,7 @@ public class PersonService {
     }
 
     public List<Person> testSearchByName(){ return repository.customFindByFirstName("ivan");}
-    public List<Person> testSearchByYear(){ return repository.customFindByConstantYear();}
+    public List<Person> testSearchByYear(){ return repository.findByConstantYearCustom();}
 
     public List<Person> testFindByNameStandard() {
         return repository.findByFirstName("ivan");
