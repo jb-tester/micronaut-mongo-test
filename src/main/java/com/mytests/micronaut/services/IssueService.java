@@ -1,6 +1,5 @@
 package com.mytests.micronaut.services;
 
-import com.mongodb.client.MongoClient;
 import com.mytests.micronaut.model.Issue;
 import com.mytests.micronaut.repositories.IssueRepository;
 import jakarta.inject.Inject;

@@ -6,38 +6,27 @@
     <artifactId>micronaut-mongo-test</artifactId>
     <version>0.1</version>
     <packaging>${packaging}</packaging>
-
-   <parent>
+  <parent>
     <groupId>io.micronaut</groupId>
     <artifactId>micronaut-parent</artifactId>
-    <version>3.5.1</version>
+    <version>3.8.1</version>
   </parent>
 
   <properties>
     <packaging>jar</packaging>
-    <jdk.version>11</jdk.version>
-    <release.version>11</release.version>
-    <micronaut.version>3.5.1</micronaut.version>
-    <exec.mainClass>com.example.Application</exec.mainClass>
-    <micronaut.data.version>3.3.0</micronaut.data.version>
+    <jdk.version>17</jdk.version>
+    <release.version>17</release.version>
+    <micronaut.version>3.8.1</micronaut.version>
     <micronaut.runtime>netty</micronaut.runtime>
+    <micronaut.data.version>3.9.4</micronaut.data.version>
+    <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
+    <exec.mainClass>com.mytests.micronaut.Application</exec.mainClass>
   </properties>
-
 
   <repositories>
     <repository>
       <id>central</id>
       <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-    <repository>
-      <id>sonatype-snapshots</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
     </repository>
   </repositories>
 
@@ -51,21 +40,6 @@
       <groupId>io.micronaut</groupId>
       <artifactId>micronaut-validation</artifactId>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.test</groupId>
-      <artifactId>micronaut-test-junit5</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.micronaut</groupId>
@@ -83,30 +57,8 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-runtime</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.data</groupId>
-      <artifactId>micronaut-data-hibernate-jpa</artifactId>
-      <version>3.3.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>io.micronaut.data</groupId>
       <artifactId>micronaut-data-mongodb</artifactId>
-      <version>3.3.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.mongodb</groupId>
-      <artifactId>micronaut-mongo-sync</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.sql</groupId>
-      <artifactId>micronaut-jdbc-hikari</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -120,23 +72,27 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+      <!--<scope>runtime</scope>-->
     </dependency>
+    <!--<dependency>
+      <groupId>io.micronaut.mongodb</groupId>
+      <artifactId>micronaut-mongo-sync</artifactId>
+    </dependency>-->
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>junit-jupiter</artifactId>
+      <groupId>io.micronaut.test</groupId>
+      <artifactId>micronaut-test-junit5</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>mongodb</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -146,8 +102,10 @@
       <plugin>
         <groupId>io.micronaut.build</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
+        <configuration>
+        </configuration>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -155,20 +113,35 @@
           <!-- Uncomment to enable incremental compilation -->
           <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
 
-          <annotationProcessorPaths combine.children="append">
+          <annotationProcessorPaths combine.self="override">
+            <path>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-inject-java</artifactId>
+              <version>${micronaut.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut.data</groupId>
+              <artifactId>micronaut-data-processor</artifactId>
+              <version>${micronaut.data.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-graal</artifactId>
+              <version>${micronaut.version}</version>
+            </path>
             <path>
               <groupId>io.micronaut</groupId>
               <artifactId>micronaut-http-validation</artifactId>
               <version>${micronaut.version}</version>
             </path>
             <path>
-              <groupId>io.micronaut.data</groupId>
-              <artifactId>micronaut-data-document-processor</artifactId>
-              <version>3.3.0</version>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-validation</artifactId>
+              <version>${micronaut.version}</version>
             </path>
             <path>
               <groupId>io.micronaut.data</groupId>
-              <artifactId>micronaut-data-processor</artifactId>
+              <artifactId>micronaut-data-document-processor</artifactId>
               <version>${micronaut.data.version}</version>
             </path>
           </annotationProcessorPaths>
@@ -180,17 +153,4 @@
       </plugin>
     </plugins>
   </build>
-
-    <pluginRepositories>
-       <pluginRepository>
-           <id>central</id>
-           <url>https://repo.maven.apache.org/maven2</url>
-       </pluginRepository>
-       <pluginRepository>
-           <id>ossrh</id>
-           <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-           <snapshots>
-               <enabled>true</enabled>
-           </snapshots>
-       </pluginRepository>
-    </pluginRepositories></project>
+  </project>

@@ -1,6 +1,5 @@
 package com.mytests.micronaut.repositories;
 
-import com.mytests.micronaut.model.Card;
 import com.mytests.micronaut.model.Issue;
 import io.micronaut.data.mongodb.annotation.MongoFindQuery;
 import io.micronaut.data.mongodb.annotation.MongoRepository;
