@@ -1,5 +1,6 @@
 package com.mytests.micronaut.repositories;
 
+import com.mytests.micronaut.annotations.MyQuery;
 import com.mytests.micronaut.model.Card;
 import com.mytests.micronaut.model.Person;
 import io.micronaut.data.annotation.Id;
@@ -53,7 +54,9 @@ public interface PersonRepository extends CrudRepository<Person, String> {
     List<Person> findByBirthYearLessThan();
 
     // for some reasons filter is ignored here, but projection works
-    @MongoFilter("{name: {$regex: :name}}") @MongoProjection("{surname: 1, name: 1, year: 1, title: 1}")
+    //@MongoFilter("{name: {$regex: :name}}")
+    @MongoProjection("{_id: 0, surname: 1, name: 1, year: 1, title: 1}")
+    //@MyQuery
     List<Person> findByBirthYearLessThan(Integer birthYear, String name);
 
     @MongoFindQuery("{'cards.number': {$regex: :pattern }}") @Join("card")
