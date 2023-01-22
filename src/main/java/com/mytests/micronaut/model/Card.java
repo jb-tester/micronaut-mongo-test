@@ -3,6 +3,7 @@ package com.mytests.micronaut.model;
 import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public class Card {
 
     String number;
     Date valid;
+    @MappedProperty
     Person owner;
 
     public String getNumber() {

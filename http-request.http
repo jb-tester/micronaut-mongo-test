@@ -1,3 +1,16 @@
+###cardSorted
+GET http://localhost:8080/cardsSorted
+
+<> 2023-01-22T182706.200.json
+
+###cardsByOwnerName
+GET http://localhost:8080/cardsByOwnerName
+
+<> 2023-01-22T182720.200.json
+
+###addNewPerson
+POST http://localhost:8080/add/john/smith/1935
+
 ###issuesAfter
 GET http://localhost:8080/issuesAfter
 
