@@ -22,6 +22,9 @@ public interface IssueRepository extends CrudRepository<Issue, ObjectId> {
     @MongoFindQuery("{created: {$gt: ISODate('2020-04-30T00:00:00.000Z')}}")
     List<Issue> findByCreatedAfter();
 
+    @MongoFindQuery("{created: {$lt: new Date()}}")
+    List<Issue> findByCreatedBefore();
+
     // false inspection violations in case of incorrect method signature but present annotation:
     // https://youtrack.jetbrains.com/issue/IDEA-301664
     @MongoFindQuery("{title: {$regex: :pattern} }")

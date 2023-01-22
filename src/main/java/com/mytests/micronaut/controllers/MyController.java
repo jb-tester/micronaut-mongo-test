@@ -86,7 +86,10 @@ public class MyController {
     public List<Person> findByCardNumberPattern() {
         return personService.testFindByCards();
     }
-
+    @Get("/issuesBefore")
+    public List<Issue> getIssuesCreatedBefore() {
+        return issueService.findByCreatedBefore();
+    }
     @Get("/issuesAfter")
     public List<Issue> getIssuesCreatedAfter() {
         return issueService.findByCreatedAfter();

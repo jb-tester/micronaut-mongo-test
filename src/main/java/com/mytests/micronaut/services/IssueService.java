@@ -22,5 +22,8 @@ public class IssueService {
     public List<Issue> findByCreatedAfter(){
         return repository.findByCreatedAfter();
     }
+    public List<Issue> findByCreatedBefore(){
+        return repository.findByCreatedBefore();
+    }
 
 }
