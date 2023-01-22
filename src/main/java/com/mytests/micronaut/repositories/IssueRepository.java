@@ -22,6 +22,7 @@ public interface IssueRepository extends CrudRepository<Issue, ObjectId> {
     @MongoFindQuery("{created: {$gt: ISODate('2020-04-30T00:00:00.000Z')}}")
     List<Issue> findByCreatedAfter();
 
+    // same or new Date():
     @MongoFindQuery("{created: {$lt: new Date()}}")
     List<Issue> findByCreatedBefore();
 
